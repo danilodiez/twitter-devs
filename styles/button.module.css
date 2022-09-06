@@ -1,0 +1,20 @@
+.login_button {
+  border-radius: 9999px;
+  border: 0;
+  font-size: 16px;
+  font-weight: 800;
+  margin-top: 16px;
+  padding: 8px 24px;
+  transition: opacity .3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.login_button:hover {
+  opacity: .7;
+  cursor: pointer;
+}
+
+.login_button>svg {
+  margin-right: 8px;
+}
