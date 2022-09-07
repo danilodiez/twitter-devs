@@ -1,28 +1,29 @@
-import React, { useState, useEffect } from 'react'
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-import Image from 'next/image'
-import Button from './components/Button'
-import GithubLogo from './components/GithubLogo'
+import { useState, useEffect } from "react";
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
+import Image from "next/image";
+import Button from "./components/Button";
+import GithubLogo from "./components/GithubLogo";
 
-import { loginWithGithub, onAuthStateChanged } from '../firebase/client'
+import { loginWithGithub, onAuthStateChanged } from "../firebase/client";
 
 export default function Home() {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
 
   const handleClick = () => {
-    loginWithGithub().then(user =>{
-      const { avatar, username, url } = user
-      setUser(user)
-    }).catch(err => (
-      console.log(err)
-    ))
-  }
+    loginWithGithub()
+      .then((user) => {
+        // eslint-disable-next-line no-unused-vars
+        const { avatar, username, url } = user;
+        setUser(user);
+      })
+      .catch((err) => console.log(err));
+  };
 
   // eslint-disable-next-line no-unused-expressions
   useEffect(() => {
-    onAuthStateChanged(setUser)
-  }, [])
+    onAuthStateChanged(setUser);
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -33,25 +34,24 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <div className={styles.title_section}>
-        <Image src='/app_logo.png' alt="Twitter devs logo" width="96" height="96"/>
-      <h1 className={styles.title}>
-          Twitter devs
-      </h1>
-            </div>
-         <a>
-         👩🏻‍💻 Descubre de que hablan lxs desarroladorxs hoy 👨🏻‍💻
-         </a>
-          {
-            user === null
-              ? <Button onClick={handleClick}>
-              <GithubLogo width={32} height={32}/>
-              Login with Github
-            </Button>
-              : <div>
-            </div>
-          }
-
+          <Image
+            src="/app_logo.png"
+            alt="Twitter devs logo"
+            width="96"
+            height="96"
+          />
+          <h1 className={styles.title}>Twitter devs</h1>
+        </div>
+        <a>👩🏻‍💻 Descubre de que hablan lxs desarroladorxs hoy 👨🏻‍💻</a>
+        {user === null ? (
+          <Button onClick={handleClick}>
+            <GithubLogo width={32} height={32} />
+            Login with Github
+          </Button>
+        ) : (
+          <div></div>
+        )}
       </main>
     </div>
-  )
+  );
 }
