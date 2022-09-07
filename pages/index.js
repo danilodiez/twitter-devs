@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Image from "next/image";
-import Button from "./components/Button";
-import GithubLogo from "./components/GithubLogo";
+import Button from "../components/Button/Button";
+import GithubLogo from "../components/Icons/GithubLogo";
 
 import { loginWithGithub, onAuthStateChanged } from "../firebase/client";
 
