@@ -1,33 +1,28 @@
-import {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import Link from 'next/link'
-import { useRouter
- } from 'next/router'
 import Image from 'next/image'
 import Button from './components/Button'
 import GithubLogo from './components/GithubLogo'
 
-import {loginWithGithub, onAuthStateChanged} from '../firebase/client'
+import { loginWithGithub, onAuthStateChanged } from '../firebase/client'
 
 export default function Home() {
   const [user, setUser] = useState(null)
 
   const handleClick = () => {
     loginWithGithub().then(user =>{
-      const {avatar, username, url} = user
+      const { avatar, username, url } = user
       setUser(user)
-    })
-    .catch(err => (
+    }).catch(err => (
       console.log(err)
     ))
   }
-  console.log(user)
 
+  // eslint-disable-next-line no-unused-expressions
   useEffect(() => {
     onAuthStateChanged(setUser)
-  }), []
-
+  }, [])
 
   return (
     <div className={styles.container}>
@@ -47,11 +42,12 @@ export default function Home() {
          👩🏻‍💻 Descubre de que hablan lxs desarroladorxs hoy 👨🏻‍💻
          </a>
           {
-            user === null ? <Button onClick={handleClick}>
+            user === null
+              ? <Button onClick={handleClick}>
               <GithubLogo width={32} height={32}/>
               Login with Github
-            </Button> : <div>
-              {user.avatar}
+            </Button>
+              : <div>
             </div>
           }
 
