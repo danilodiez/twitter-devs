@@ -1,9 +1,10 @@
-import Image from "next/image";
+import styles from "./Avatar.module.css";
 
-export default function Avatar({ alt, src }) {
+export default function Avatar({ src, text }) {
   return (
-    <>
-      <Image width={24} height={24} alt={alt} src={src} />
-    </>
+    <div className={styles.container}>
+      <img className={styles.avatar} alt={text} src={src} />
+      <strong>{text} </strong>
+    </div>
   );
 }

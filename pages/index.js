@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
+import styles from "styles/Home.module.css";
 import Image from "next/image";
-import Button from "../components/Button/Button";
-import GithubLogo from "../components/Icons/GithubLogo";
-
-import { loginWithGithub, onAuthStateChanged } from "../firebase/client";
+import Button from "components/Button/Button";
+import GithubLogo from "components/Icons/GithubLogo";
+import Avatar from "components/Avatar";
+// eslint-disable-next-line import/no-absolute-path
+import { loginWithGithub, onAuthStateChanged } from "/firebase/client";
 
 export default function Home() {
   const [user, setUser] = useState(null);
@@ -49,7 +50,9 @@ export default function Home() {
             Login with Github
           </Button>
         ) : (
-          <div></div>
+          <div>
+            <Avatar text={user.username} src={user.avatar} />
+          </div>
         )}
       </main>
     </div>
