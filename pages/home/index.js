@@ -4,13 +4,11 @@ import Tweet from "components/Tweet";
 
 export default function HomePage() {
   const [timeline, setTimeline] = useState([]);
-
   useEffect(() => {
     fetch("http://localhost:3001/api/statuses/home_timeline")
       .then((res) => res.json())
       .then(setTimeline);
   });
-  console.log(timeline);
   return (
     <div>
       <header className={styles.header}>

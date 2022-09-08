@@ -15,11 +15,12 @@ const firebaseConfig = {
 firebase.apps.length === 0 && firebase.initializeApp(firebaseConfig);
 
 const mapUserFromFirebaseAuthToUser = (user) => {
-  const { photoURL, email, displayName } = user;
+  const { photoURL, email, displayName, uid } = user;
   return {
     avatar: photoURL,
     username: displayName,
     email,
+    uid,
   };
 };
 
@@ -34,3 +35,5 @@ export const loginWithGithub = () => {
   const githubProvider = new firebase.auth.GithubAuthProvider();
   return firebase.auth().signInWithPopup(githubProvider);
 };
+
+export const addTweet = ({ avatar, content, userId, userName }) => {};

@@ -18,3 +18,7 @@
 .login_button > svg {
   margin-right: 8px;
 }
+
+.login_button[disabled] {
+  pointer-events: none;
+}

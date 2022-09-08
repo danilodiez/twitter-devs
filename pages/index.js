@@ -1,31 +1,25 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Head from "next/head";
 import styles from "styles/Home.module.css";
 import Image from "next/image";
 import Button from "components/Button/Button";
 import GithubLogo from "components/Icons/GithubLogo";
-import Avatar from "components/Avatar";
 // eslint-disable-next-line import/no-absolute-path
-import { loginWithGithub, onAuthStateChanged } from "/firebase/client";
+import { loginWithGithub } from "/firebase/client";
+import { useRouter } from "next/router";
+import useUser from "hooks/useUser";
 
 export default function Home() {
-  const [user, setUser] = useState(null);
+  const user = useUser();
+  const router = useRouter();
 
   const handleClick = () => {
-    loginWithGithub()
-      .then((user) => {
-        // eslint-disable-next-line no-unused-vars
-        const { avatar, username, url } = user;
-        setUser(user);
-      })
-      .catch((err) => console.log(err));
+    loginWithGithub().catch((err) => console.log(err));
   };
 
-  // eslint-disable-next-line no-unused-expressions
   useEffect(() => {
-    onAuthStateChanged(setUser);
-  }, []);
-
+    user && router.replace("/home");
+  }, [user]);
   return (
     <div className={styles.container}>
       <Head>
@@ -50,9 +44,7 @@ export default function Home() {
             Login with Github
           </Button>
         ) : (
-          <div>
-            <Avatar text={user.username} src={user.avatar} />
-          </div>
+          <img src="/spinner.gif" />
         )}
       </main>
     </div>
