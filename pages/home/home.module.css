@@ -1,7 +1,7 @@
 .header {
   border-bottom: 1px solid white;
   height: 49px;
-  position: fixed;
+  position: sticky;
   width: 100%;
   top: 0;
 }
@@ -10,7 +10,7 @@
   bottom: 0;
   border-top: 1px solid white;
   height: 49px;
-  position: fixed;
+  position: sticky;
   width: 100%;
 }
 

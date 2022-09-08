@@ -1,6 +1,6 @@
 import styles from "./home.module.css";
 import { useState, useEffect } from "react";
-import Avatar from "components/Avatar";
+import Tweet from "components/Tweet";
 
 export default function HomePage() {
   const [timeline, setTimeline] = useState([]);
@@ -20,9 +20,13 @@ export default function HomePage() {
         {/* <Home /> */}
         {timeline.map((devtweet) => {
           return (
-            <article key={devtweet.id}>
-              <Avatar src={devtweet.avatar} text={devtweet.name} />
-            </article>
+            <Tweet
+              avatar={devtweet.avatar}
+              id={devtweet.id}
+              key={devtweet.id}
+              message={devtweet.message}
+              username={devtweet.username}
+            />
           );
         })}
       </section>
