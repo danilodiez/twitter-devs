@@ -1,6 +1,12 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
+import {
+  getFirestore,
+  collection,
+  Timestamp,
+  addDoc,
+} from "firebase/firestore/lite";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyB77Q-GrYOyZEvJvHmTsDNb-Qc2418YW4A",
@@ -12,7 +18,11 @@ const firebaseConfig = {
   measurementId: "G-RFKLGDCDXD",
 };
 
-firebase.apps.length === 0 && firebase.initializeApp(firebaseConfig);
+// const db = getFirestore(app);
+// firebase.apps.length === 0 && firebase.initializeApp(firebaseConfig);
+const app = firebase.initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
 
 const mapUserFromFirebaseAuthToUser = (user) => {
   const { photoURL, email, displayName, uid } = user;
@@ -36,4 +46,14 @@ export const loginWithGithub = () => {
   return firebase.auth().signInWithPopup(githubProvider);
 };
 
-export const addTweet = ({ avatar, content, userId, userName }) => {};
+export const addTweet = async ({ avatar, content, userId, userName }) => {
+  return await addDoc(collection(db, "tweets"), {
+    avatar,
+    content,
+    userId,
+    userName,
+    createdAt: Timestamp.fromDate(new Date()),
+    likesCount: 0,
+    sharedCount: 0,
+  });
+};
