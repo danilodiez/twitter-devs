@@ -6,6 +6,8 @@ import {
   collection,
   Timestamp,
   addDoc,
+  query,
+  getDocs,
 } from "firebase/firestore/lite";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -56,4 +58,14 @@ export const addTweet = async ({ avatar, content, userId, userName }) => {
     likesCount: 0,
     sharedCount: 0,
   });
+};
+
+export const fetchLatestTweets = async () => {
+  const q = query(collection(db, "tweets"));
+  const querySnap = await getDocs(q);
+  const data = querySnap.docs.map((doc) => ({
+    ...doc.data(),
+    id: doc.id,
+  }));
+  return data;
 };

@@ -1,14 +1,16 @@
 import styles from "./home.module.css";
 import { useState, useEffect } from "react";
 import Tweet from "components/Tweet";
+// eslint-disable-next-line import/no-absolute-path
+import { fetchLatestTweets } from "/firebase/client";
+import useUser from "hooks/useUser";
 
 export default function HomePage() {
   const [timeline, setTimeline] = useState([]);
+  const user = useUser();
   useEffect(() => {
-    fetch("http://localhost:3000/api/statuses/home_timeline")
-      .then((res) => res.json())
-      .then(setTimeline);
-  });
+    user && fetchLatestTweets().then(setTimeline);
+  }, [user]);
   return (
     <div>
       <header className={styles.header}>
@@ -16,14 +18,17 @@ export default function HomePage() {
       </header>
       <section className={styles.section}>
         {/* <Home /> */}
-        {timeline.map((devtweet) => {
+        {timeline.map((tweet) => {
+          console.log(tweet);
           return (
             <Tweet
-              avatar={devtweet.avatar}
-              id={devtweet.id}
-              key={devtweet.id}
-              message={devtweet.message}
-              username={devtweet.username}
+              avatar={tweet.avatar}
+              createdAt={tweet.createdAt}
+              id={tweet.id}
+              key={tweet.id}
+              content={tweet.content}
+              userId={tweet.userId}
+              userName={tweet.userName}
             />
           );
         })}

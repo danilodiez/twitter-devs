@@ -40,7 +40,7 @@ export default function ComposeTweet() {
       });
   };
 
-  const isButtonDisabled = !message.length && status === COMPOSE_STATES.LOADING;
+  const isButtonDisabled = !message.length || status === COMPOSE_STATES.LOADING;
 
   return (
     <form onSubmit={handleSubmit}>
