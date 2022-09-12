@@ -8,10 +8,10 @@ export default function Tweet({ avatar, userName, content, createdAt, id }) {
     <>
       <article className={styles.article}>
         <div className={styles.div}>
-          <header>
+          <header className={styles.header}>
             <Avatar src={avatar} text={userName} />
-            <span>.</span>
-            <date>{normalizedDate}</date>
+            <span> . </span>
+            <date className={styles.date}> {normalizedDate}</date>
           </header>
         </div>
         <section>

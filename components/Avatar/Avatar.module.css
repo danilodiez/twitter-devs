@@ -1,7 +1,7 @@
 .container {
   align-items: center;
   display: flex;
-  margin-top: 10px;
+  padding-right: 10px;
 }
 
 .avatar {

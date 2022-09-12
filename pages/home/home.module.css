@@ -9,15 +9,27 @@
 }
 
 .nav {
-  bottom: 0;
   border-top: 1px solid #ccc;
   height: 49px;
   position: sticky;
+  bottom: 0;
   width: 100%;
   background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.nav a:hover {
+  background-size: 180px 180px;
+  background-position: center;
 }
 
 .h2 {
   margin-top: 5px;
   padding-left: 10px;
+}
+
+.section {
+  height: calc(100vh - 108px);
 }

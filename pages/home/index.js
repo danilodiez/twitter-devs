@@ -4,7 +4,10 @@ import Tweet from "components/Tweet";
 // eslint-disable-next-line import/no-absolute-path
 import { fetchLatestTweets } from "/firebase/client";
 import useUser from "hooks/useUser";
-
+import Link from "next/link";
+import { CreateLogo } from "components/Icons/CreateLogo";
+import { HomeIcon } from "components/Icons/HomeIcon";
+import { SearchIcon } from "components/Icons/SearchIcon";
 export default function HomePage() {
   const [timeline, setTimeline] = useState([]);
   const user = useUser();
@@ -33,7 +36,23 @@ export default function HomePage() {
           );
         })}
       </section>
-      <nav className={styles.nav}>a</nav>
+      <nav className={styles.nav}>
+        <Link href="/compose/tweet">
+          <a>
+            <HomeIcon />
+          </a>
+        </Link>
+        <Link href="/compose/tweet">
+          <a>
+            <SearchIcon />
+          </a>
+        </Link>
+        <Link href="/compose/tweet">
+          <a>
+            <CreateLogo />
+          </a>
+        </Link>
+      </nav>
     </div>
   );
 }
