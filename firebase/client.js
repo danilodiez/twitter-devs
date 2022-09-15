@@ -9,6 +9,8 @@ import {
   query,
   getDocs,
 } from "firebase/firestore/lite";
+import { getStorage, ref } from "firebase/storage";
+
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyB77Q-GrYOyZEvJvHmTsDNb-Qc2418YW4A",
@@ -66,4 +68,12 @@ export const fetchLatestTweets = async () => {
     id: doc.id,
   }));
   return data;
+};
+
+export const uploadImage = (file) => {
+  const storage = getStorage();
+
+  const reference = ref(storage, `images/${file.name}`);
+  const task = reference.put(file);
+  return task;
 };
